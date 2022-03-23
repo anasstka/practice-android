@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/Administrator/Desktop/CvetkovaPracticeNew/app/src/main/res/drawable-v24/button_filled_style.xml" value="0.2395" />
+        <entry key="..\:/Users/Administrator/Desktop/CvetkovaPracticeNew/app/src/main/res/drawable-v24/ic_logo_with_text.xml" value="0.2395" />
+        <entry key="..\:/Users/Administrator/Desktop/CvetkovaPracticeNew/app/src/main/res/drawable-v24/view_border.xml" value="0.2395" />
+        <entry key="..\:/Users/Administrator/Desktop/CvetkovaPracticeNew/app/src/main/res/drawable/bottom_navigation_selector.xml" value="0.2395" />
+        <entry key="..\:/Users/Administrator/Desktop/CvetkovaPracticeNew/app/src/main/res/drawable/ic_selections.xml" value="0.2395" />
+        <entry key="..\:/Users/Administrator/Desktop/CvetkovaPracticeNew/app/src/main/res/drawable/poster_border.xml" value="0.2395" />
+        <entry key="..\:/Users/Administrator/Desktop/CvetkovaPracticeNew/app/src/main/res/layout/activity_main.xml" value="0.28229166666666666" />
+        <entry key="..\:/Users/Administrator/Desktop/CvetkovaPracticeNew/app/src/main/res/layout/activity_sign_in.xml" value="0.25" />
+        <entry key="..\:/Users/Administrator/Desktop/CvetkovaPracticeNew/app/src/main/res/layout/activity_sign_up.xml" value="0.358695652173913" />
+        <entry key="..\:/Users/Administrator/Desktop/CvetkovaPracticeNew/app/src/main/res/layout/activity_splash.xml" value="0.14722222222222223" />
+        <entry key="..\:/Users/Administrator/Desktop/CvetkovaPracticeNew/app/src/main/res/layout/fragment_main.xml" value="0.28229166666666666" />
+        <entry key="..\:/Users/Administrator/Desktop/CvetkovaPracticeNew/app/src/main/res/layout/fragment_profile.xml" value="0.28229166666666666" />
+        <entry key="..\:/Users/Administrator/Desktop/CvetkovaPracticeNew/app/src/main/res/layout/fragment_selections.xml" value="0.28229166666666666" />
+        <entry key="..\:/Users/Administrator/Desktop/CvetkovaPracticeNew/app/src/main/res/menu/menu.xml" value="0.28229166666666666" />
+        <entry key="..\:/Users/Administrator/Desktop/CvetkovaPracticeNew/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.108" />
+        <entry key="..\:/Users/Administrator/Desktop/CvetkovaPracticeNew/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.108" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>
