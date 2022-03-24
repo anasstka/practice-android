@@ -16,3 +16,5 @@ class SharedPrefs(
         get() = prefs.getInt(TOKEN, -1)
         set(value) = prefs.edit().putInt(TOKEN, value).apply()
 }
+
+var userToken: Int = -1

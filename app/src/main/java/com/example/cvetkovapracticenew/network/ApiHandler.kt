@@ -1,6 +1,10 @@
 package com.example.cvetkovapracticenew.network
 
+import com.example.cvetkovapracticenew.data.SharedPrefs
+import com.example.cvetkovapracticenew.data.userToken
+import okhttp3.Interceptor
 import okhttp3.OkHttpClient
+import okhttp3.Response
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -29,6 +33,13 @@ class ApiHandler {
         interceptor.level = HttpLoggingInterceptor.Level.BODY
         val client = OkHttpClient.Builder()
             .addInterceptor(interceptor)
+            .addInterceptor(object : Interceptor {
+                override fun intercept(chain: Interceptor.Chain): Response {
+                    val request = chain.request().newBuilder()
+                        .addHeader("Authorization", "Bearer $userToken").build()
+                    return chain.proceed(request)
+                }
+            })
 
         retrofit = Retrofit.Builder()
             .baseUrl(BASE_URL)

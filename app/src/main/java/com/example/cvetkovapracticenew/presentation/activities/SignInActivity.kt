@@ -60,6 +60,7 @@ class SignInActivity : AppCompatActivity(), View.OnClickListener {
 
                         val intent = Intent(applicationContext, MainActivity::class.java)
                         startActivity(intent)
+                        finish()
 
                     } else if (response.code() == 400) {
                         Toast.makeText(
