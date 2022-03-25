@@ -1,4 +1,4 @@
-package com.example.cvetkovapracticenew
+package com.example.cvetkovapracticenew.presentation.view
 
 import android.app.AlertDialog
 import android.app.Dialog

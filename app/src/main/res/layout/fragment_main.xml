@@ -8,33 +8,10 @@
     android:orientation="vertical"
     tools:context=".presentation.fragments.MainFragment">
 
-    <Space
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_movies"
         android:layout_width="match_parent"
-        android:layout_height="13dp" />
-
-    <TextView
-        android:id="@+id/tv_movieTitle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textAlignment="center"
-        android:textColor="#fff"
-        android:textSize="24sp"
-        android:textStyle="bold" />
-
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="72dp" />
-
-    <androidx.cardview.widget.CardView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:elevation="24dp"
-        app:cardCornerRadius="16dp">
-
-        <ImageView
-            android:id="@+id/iv_moviePoster"
-            android:layout_width="327dp"
-            android:layout_height="486dp" />
-    </androidx.cardview.widget.CardView>
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        tools:listitem="@layout/movie_item" />
 </LinearLayout>

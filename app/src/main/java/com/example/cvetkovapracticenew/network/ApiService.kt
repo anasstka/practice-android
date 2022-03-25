@@ -24,4 +24,12 @@ interface ApiService {
 
     @GET("/user")
     fun getUser(): Call<List<UserResponse>>
+
+    @GET("/user/avatar")
+    fun changeUserAvatar(
+        @Query("file")
+        filter: String,
+        @Query("token")
+        token: String
+    ): Call<List<UserResponse>>
 }

@@ -9,11 +9,14 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.example.cvetkovapracticenew.R
 import com.example.cvetkovapracticenew.network.ApiHandler
 import com.example.cvetkovapracticenew.network.ApiService
 import com.example.cvetkovapracticenew.network.models.MoviesResponse
+import com.example.cvetkovapracticenew.presentation.adapters.MovieAdapter
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -21,8 +24,8 @@ import retrofit2.Response
 class MainFragment : Fragment() {
 
     var service: ApiService = ApiHandler.instance.service
-    lateinit var tvMovieTitle: TextView
-    lateinit var ivMoviePoster: ImageView
+
+    lateinit var rvMovies: RecyclerView
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -35,8 +38,8 @@ class MainFragment : Fragment() {
             false
         )
 
-        tvMovieTitle = view.findViewById(R.id.tv_movieTitle)
-        ivMoviePoster = view.findViewById(R.id.iv_moviePoster)
+        rvMovies = view.findViewById(R.id.rv_movies)
+        rvMovies.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
 
         getMovieCover()
 
@@ -52,11 +55,8 @@ class MainFragment : Fragment() {
                 ) {
                     if (response.isSuccessful) {
                         val movies = response.body()
-                        if (movies != null) {
-                            tvMovieTitle.text = movies[1].name
-                            ivMoviePoster.load("http://cinema.areas.su/up/images/" + movies[1].posterUrl)
-                        }
-
+                        if (movies != null)
+                            rvMovies.adapter = MovieAdapter(movies)
                     } else if (response.code() == 400) {
                         Toast.makeText(
                             context,
