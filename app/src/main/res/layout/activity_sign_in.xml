@@ -45,8 +45,8 @@
         style="@style/ButtonText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/dimen_16"
         android:layout_above="@id/btn_openSignUp"
+        android:layout_marginBottom="@dimen/dimen_16"
         android:background="@drawable/button_filled_style"
         android:text="Войти" />
 

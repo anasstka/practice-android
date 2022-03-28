@@ -3,6 +3,7 @@ package com.example.cvetkovapracticenew.presentation.activities
 import android.content.Intent
 import android.os.AsyncTask
 import android.os.Bundle
+import android.util.Patterns
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -11,6 +12,7 @@ import com.example.cvetkovapracticenew.network.ApiHandler
 import com.example.cvetkovapracticenew.network.ApiService
 import com.example.cvetkovapracticenew.network.models.RegistrationBody
 import com.example.cvetkovapracticenew.presentation.view.Dialog
+import kotlinx.android.synthetic.main.activity_sign_in.*
 import kotlinx.android.synthetic.main.activity_sign_up.*
 import okhttp3.ResponseBody
 import retrofit2.Call
@@ -43,6 +45,9 @@ class SignUpActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun doSignUp() {
+        if (!isValidField())
+            return
+
         AsyncTask.execute {
             service.register(getRegisterData()).enqueue(object : Callback<ResponseBody> {
                 override fun onResponse(
@@ -74,5 +79,33 @@ class SignUpActivity : AppCompatActivity(), View.OnClickListener {
             firstName = et_signUpName.text.toString(),
             lastName = et_signUpSurname.text.toString()
         )
+    }
+
+    private fun isValidField(): Boolean {
+        if (et_signUpName.text.toString().isBlank()) {
+            Dialog(this@SignUpActivity, "Поле Имя не может быть пустым")
+            return false
+        }
+        if (et_signUpSurname.text.toString().isBlank()) {
+            Dialog(this@SignUpActivity, "Поле Фамилия не может быть пустым")
+            return false
+        }
+        if (et_signUpEmail.text.toString().isBlank()) {
+            Dialog(this@SignUpActivity, "Поле E-mail не может быть пустым")
+            return false
+        }
+        if (!Patterns.EMAIL_ADDRESS.matcher(et_signInEmail.text.toString()).matches()) {
+            Dialog(this@SignUpActivity, "Некорректный E-mail")
+            return false
+        }
+        if (et_signInPassword.text.toString().isBlank()) {
+            Dialog(this@SignUpActivity, "Поле Пароль не может быть пустым")
+            return false
+        }
+        if (et_signInPassword.text.toString() != et_signInRepeatPassword.text.toString()) {
+            Dialog(this@SignUpActivity, "Пароли не совпадают")
+            return false
+        }
+        return true
     }
 }

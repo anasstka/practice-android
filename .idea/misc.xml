@@ -7,6 +7,7 @@
         <entry key="..\:/Users/Administrator/Desktop/CvetkovaPracticeNew/app/src/main/res/drawable-v24/ic_logo_with_text.xml" value="0.2395" />
         <entry key="..\:/Users/Administrator/Desktop/CvetkovaPracticeNew/app/src/main/res/drawable-v24/view_border.xml" value="0.2395" />
         <entry key="..\:/Users/Administrator/Desktop/CvetkovaPracticeNew/app/src/main/res/drawable/bottom_navigation_selector.xml" value="0.2395" />
+        <entry key="..\:/Users/Administrator/Desktop/CvetkovaPracticeNew/app/src/main/res/drawable/ic_logo.xml" value="0.1865" />
         <entry key="..\:/Users/Administrator/Desktop/CvetkovaPracticeNew/app/src/main/res/drawable/ic_selections.xml" value="0.2395" />
         <entry key="..\:/Users/Administrator/Desktop/CvetkovaPracticeNew/app/src/main/res/drawable/poster_border.xml" value="0.2395" />
         <entry key="..\:/Users/Administrator/Desktop/CvetkovaPracticeNew/app/src/main/res/layout/activity_main.xml" value="0.28229166666666666" />
@@ -22,6 +23,11 @@
         <entry key="..\:/Users/Administrator/Desktop/CvetkovaPracticeNew/app/src/main/res/menu/menu.xml" value="0.28229166666666666" />
         <entry key="..\:/Users/Administrator/Desktop/CvetkovaPracticeNew/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.108" />
         <entry key="..\:/Users/Administrator/Desktop/CvetkovaPracticeNew/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.108" />
+        <entry key="..\:/Users/Administrator/Desktop/CvetkovaPracticeNew/app_wear/src/main/res/drawable/ic_logo.xml" value="0.1865" />
+        <entry key="..\:/Users/Administrator/Desktop/CvetkovaPracticeNew/app_wear/src/main/res/layout/activity_chat_list.xml" value="1.1973684210526316" />
+        <entry key="..\:/Users/Administrator/Desktop/CvetkovaPracticeNew/app_wear/src/main/res/layout/activity_main.xml" value="0.7724719101123596" />
+        <entry key="..\:/Users/Administrator/Desktop/CvetkovaPracticeNew/app_wear/src/main/res/layout/activity_sign_in.xml" value="1.25" />
+        <entry key="..\:/Users/Administrator/Desktop/CvetkovaPracticeNew/app_wear/src/main/res/layout/activity_splash.xml" value="1.0" />
       </map>
     </option>
   </component>

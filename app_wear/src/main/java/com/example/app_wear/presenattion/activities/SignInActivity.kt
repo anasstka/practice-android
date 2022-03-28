@@ -1,19 +1,18 @@
-package com.example.cvetkovapracticenew.presentation.activities
+package com.example.app_wear.presenattion.activities
 
 import android.content.Intent
 import android.os.AsyncTask
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Patterns
 import android.view.View
-import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
-import com.example.cvetkovapracticenew.R
-import com.example.cvetkovapracticenew.data.SharedPrefs
-import com.example.cvetkovapracticenew.network.ApiHandler
-import com.example.cvetkovapracticenew.network.ApiService
-import com.example.cvetkovapracticenew.network.models.LoginBody
-import com.example.cvetkovapracticenew.network.models.LoginResponse
-import com.example.cvetkovapracticenew.presentation.view.Dialog
+import com.example.app_wear.R
+import com.example.app_wear.data.SharedPrefs
+import com.example.app_wear.network.ApiHandler
+import com.example.app_wear.network.ApiService
+import com.example.app_wear.network.models.LoginBody
+import com.example.app_wear.network.models.LoginResponse
+import com.example.app_wear.presenattion.view.Dialog
 import kotlinx.android.synthetic.main.activity_sign_in.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -21,24 +20,19 @@ import retrofit2.Response
 
 class SignInActivity : AppCompatActivity(), View.OnClickListener {
 
-    var service: ApiService = ApiHandler.instance.service
+    private var service: ApiService = ApiHandler.instance.service
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign_in)
 
         btn_signIn.setOnClickListener(this)
-        btn_openSignUp.setOnClickListener(this)
     }
 
     override fun onClick(view: View) {
         when (view.id) {
             R.id.btn_signIn -> {
                 doSignIn()
-            }
-            R.id.btn_openSignUp -> {
-                val intent = Intent(this, SignUpActivity::class.java)
-                startActivity(intent)
             }
         }
     }
