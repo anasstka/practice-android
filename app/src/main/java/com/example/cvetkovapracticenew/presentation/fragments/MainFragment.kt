@@ -17,6 +17,7 @@ import com.example.cvetkovapracticenew.network.ApiHandler
 import com.example.cvetkovapracticenew.network.ApiService
 import com.example.cvetkovapracticenew.network.models.MoviesResponse
 import com.example.cvetkovapracticenew.presentation.adapters.MovieAdapter
+import com.example.cvetkovapracticenew.presentation.view.Dialog
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -57,21 +58,13 @@ class MainFragment : Fragment() {
                         val movies = response.body()
                         if (movies != null)
                             rvMovies.adapter = MovieAdapter(movies)
-                    } else if (response.code() == 400) {
-                        Toast.makeText(
-                            context,
-                            "Проблемы при загрузке данных",
-                            Toast.LENGTH_SHORT
-                        ).show();
+                    } else {
+                        Dialog(requireActivity(), "Проблемы при загрузке данных")
                     }
                 }
 
                 override fun onFailure(call: Call<List<MoviesResponse>>, t: Throwable) {
-                    Toast.makeText(
-                        context,
-                        "Проблемы при загрузке данных",
-                        Toast.LENGTH_SHORT
-                    ).show();
+                    Dialog(requireActivity(), "Проблемы при загрузке данных")
                 }
             })
         }

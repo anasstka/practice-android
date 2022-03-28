@@ -12,6 +12,7 @@ import com.example.cvetkovapracticenew.network.ApiHandler
 import com.example.cvetkovapracticenew.network.ApiService
 import com.example.cvetkovapracticenew.network.models.LoginBody
 import com.example.cvetkovapracticenew.network.models.LoginResponse
+import com.example.cvetkovapracticenew.presentation.view.Dialog
 import kotlinx.android.synthetic.main.activity_sign_in.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -49,12 +50,6 @@ class SignInActivity : AppCompatActivity(), View.OnClickListener {
                     response: Response<LoginResponse>
                 ) {
                     if (response.isSuccessful) {
-                        Toast.makeText(
-                            applicationContext,
-                            "Авторизация прошла успешно!",
-                            Toast.LENGTH_SHORT
-                        ).show()
-
                         val sharedPrefs = SharedPrefs(applicationContext)
                         sharedPrefs.token = response.body()?.token ?: -1
 
@@ -62,21 +57,13 @@ class SignInActivity : AppCompatActivity(), View.OnClickListener {
                         startActivity(intent)
                         finish()
 
-                    } else if (response.code() == 400) {
-                        Toast.makeText(
-                            applicationContext,
-                            "Проблемы при авторизации",
-                            Toast.LENGTH_SHORT
-                        ).show();
+                    } else {
+                        Dialog(this@SignInActivity, "Проблемы при авторизации")
                     }
                 }
 
                 override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
-                    Toast.makeText(
-                        applicationContext,
-                        "Проблемы при авторизации",
-                        Toast.LENGTH_SHORT
-                    ).show();
+                    Dialog(this@SignInActivity, "Проблемы при авторизации")
                 }
             })
         }

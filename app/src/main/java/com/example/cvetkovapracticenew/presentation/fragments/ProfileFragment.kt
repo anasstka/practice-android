@@ -21,6 +21,7 @@ import com.example.cvetkovapracticenew.network.ApiHandler
 import com.example.cvetkovapracticenew.network.ApiService
 import com.example.cvetkovapracticenew.network.models.UserResponse
 import com.example.cvetkovapracticenew.presentation.activities.SignInActivity
+import com.example.cvetkovapracticenew.presentation.view.Dialog
 import kotlinx.android.synthetic.main.fragment_profile.view.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -96,45 +97,45 @@ class ProfileFragment : Fragment(), View.OnClickListener {
         when (requestCode) {
             GALLERY_REQUEST -> if (resultCode == RESULT_OK) {
                 val selectedImage: Uri? = data?.data
-                ivAvatar.setImageURI(selectedImage)
+                ivAvatar.setImageURI(selectedImage   )
             }
         }
     }
 
-    private fun changeAvatar(file: String) {
-        AsyncTask.execute {
-            service.changeUserAvatar().enqueue(object : Callback<List<UserResponse>> {
-                override fun onResponse(
-                    call: Call<List<UserResponse>>,
-                    response: Response<List<UserResponse>>
-                ) {
-                    if (response.isSuccessful) {
-                        val users = response.body()
-                        if (users != null) {
-                            val user = users[0]
-                            tvUsername.text = "${user.firstName} ${user.lastName}"
-                            tvEmail.text = user.email
-                            ivAvatar.load("http://cinema.areas.su/up/images/" + user.avatar)
-                        }
-                    } else if (response.code() == 400) {
-                        Toast.makeText(
-                            context,
-                            "Проблемы при загрузке данных",
-                            Toast.LENGTH_SHORT
-                        ).show();
-                    }
-                }
-
-                override fun onFailure(call: Call<List<UserResponse>>, t: Throwable) {
-                    Toast.makeText(
-                        context,
-                        "Проблемы при загрузке данных",
-                        Toast.LENGTH_SHORT
-                    ).show();
-                }
-            })
-        }
-    }
+//    private fun changeAvatar(file: String) {
+//        AsyncTask.execute {
+//            service.changeUserAvatar().enqueue(object : Callback<List<UserResponse>> {
+//                override fun onResponse(
+//                    call: Call<List<UserResponse>>,
+//                    response: Response<List<UserResponse>>
+//                ) {
+//                    if (response.isSuccessful) {
+//                        val users = response.body()
+//                        if (users != null) {
+//                            val user = users[0]
+//                            tvUsername.text = "${user.firstName} ${user.lastName}"
+//                            tvEmail.text = user.email
+//                            ivAvatar.load("http://cinema.areas.su/up/images/" + user.avatar)
+//                        }
+//                    } else if (response.code() == 400) {
+//                        Toast.makeText(
+//                            context,
+//                            "Проблемы при загрузке данных",
+//                            Toast.LENGTH_SHORT
+//                        ).show();
+//                    }
+//                }
+//
+//                override fun onFailure(call: Call<List<UserResponse>>, t: Throwable) {
+//                    Toast.makeText(
+//                        context,
+//                        "Проблемы при загрузке данных",
+//                        Toast.LENGTH_SHORT
+//                    ).show();
+//                }
+//            })
+//        }
+//    }
 
     private fun getUser() {
         AsyncTask.execute {
@@ -151,21 +152,13 @@ class ProfileFragment : Fragment(), View.OnClickListener {
                             tvEmail.text = user.email
                             ivAvatar.load("http://cinema.areas.su/up/images/" + user.avatar)
                         }
-                    } else if (response.code() == 400) {
-                        Toast.makeText(
-                            context,
-                            "Проблемы при загрузке данных",
-                            Toast.LENGTH_SHORT
-                        ).show();
+                    } else {
+                        Dialog(requireActivity(), "Проблемы при загрузке данных")
                     }
                 }
 
                 override fun onFailure(call: Call<List<UserResponse>>, t: Throwable) {
-                    Toast.makeText(
-                        context,
-                        "Проблемы при загрузке данных",
-                        Toast.LENGTH_SHORT
-                    ).show();
+                    Dialog(requireActivity(), "Проблемы при загрузке данных")
                 }
             })
         }

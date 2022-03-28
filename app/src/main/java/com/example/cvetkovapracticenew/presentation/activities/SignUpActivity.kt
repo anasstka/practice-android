@@ -10,6 +10,7 @@ import com.example.cvetkovapracticenew.R
 import com.example.cvetkovapracticenew.network.ApiHandler
 import com.example.cvetkovapracticenew.network.ApiService
 import com.example.cvetkovapracticenew.network.models.RegistrationBody
+import com.example.cvetkovapracticenew.presentation.view.Dialog
 import kotlinx.android.synthetic.main.activity_sign_up.*
 import okhttp3.ResponseBody
 import retrofit2.Call
@@ -49,30 +50,16 @@ class SignUpActivity : AppCompatActivity(), View.OnClickListener {
                     response: Response<ResponseBody>
                 ) {
                     if (response.isSuccessful) {
-                        Toast.makeText(
-                            applicationContext,
-                            "Регистрация прошла успешно!",
-                            Toast.LENGTH_SHORT
-                        ).show()
-
                         val intent = Intent(applicationContext, SignInActivity::class.java)
                         startActivity(intent)
 
-                    } else if (response.code() == 400) {
-                        Toast.makeText(
-                            applicationContext,
-                            "Проблемы при регитсрации",
-                            Toast.LENGTH_SHORT
-                        ).show();
+                    } else {
+                        Dialog(this@SignUpActivity, "Проблемы при регитсрации")
                     }
                 }
 
                 override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
-                    Toast.makeText(
-                        applicationContext,
-                        "Проблемы при регитсрации",
-                        Toast.LENGTH_SHORT
-                    ).show();
+                    Dialog(this@SignUpActivity, "Проблемы при регитсрации")
                 }
 
             })
