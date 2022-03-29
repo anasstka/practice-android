@@ -1,11 +1,8 @@
-package com.example.app_wear.presenattion.view
+package com.example.app_wear.presentation.view
 
 import android.app.AlertDialog
-import android.app.Dialog
 import android.content.Context
 import android.content.DialogInterface
-import android.os.Bundle
-import androidx.fragment.app.DialogFragment
 
 fun Dialog(
     context: Context,

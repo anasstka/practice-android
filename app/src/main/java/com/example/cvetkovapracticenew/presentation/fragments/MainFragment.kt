@@ -10,6 +10,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.PagerSnapHelper
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.example.cvetkovapracticenew.R
@@ -39,8 +40,10 @@ class MainFragment : Fragment() {
             false
         )
 
+        val snapHelper = PagerSnapHelper()
         rvMovies = view.findViewById(R.id.rv_movies)
         rvMovies.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+        snapHelper.attachToRecyclerView(rvMovies)
 
         getMovieCover()
 
@@ -59,12 +62,12 @@ class MainFragment : Fragment() {
                         if (movies != null)
                             rvMovies.adapter = MovieAdapter(movies)
                     } else {
-                        Dialog(requireActivity(), "Проблемы при загрузке данных")
+                        Dialog(requireActivity(), "Ошибка сервера")
                     }
                 }
 
                 override fun onFailure(call: Call<List<MoviesResponse>>, t: Throwable) {
-                    Dialog(requireActivity(), "Проблемы при загрузке данных")
+                    Dialog(requireActivity(), "Ошибка")
                 }
             })
         }

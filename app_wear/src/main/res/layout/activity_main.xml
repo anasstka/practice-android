@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/background"
     android:orientation="vertical"
-    tools:context=".presenattion.activities.SignInActivity">
+    tools:context=".presentation.activities.MainActivity">
 
 
     <LinearLayout

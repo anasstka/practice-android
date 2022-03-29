@@ -1,6 +1,5 @@
-package com.example.cvetkovapracticenew.presentation.adapters
+package com.example.app_wear.presentation.adapters
 
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,9 +7,8 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
-import com.example.cvetkovapracticenew.R
-import com.example.cvetkovapracticenew.network.models.MoviesResponse
-import com.example.cvetkovapracticenew.presentation.activities.ChatActivity
+import com.example.app_wear.R
+import com.example.app_wear.network.models.MoviesResponse
 
 class MovieAdapter(val movies: List<MoviesResponse>) :
     RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
@@ -41,13 +39,6 @@ class MovieAdapter(val movies: List<MoviesResponse>) :
 
         holder.tvMovieTitle.text = movie.name
         holder.ivMoviePoster.load("http://cinema.areas.su/up/images/" + movie.posterUrl)
-
-        holder.itemView.setOnClickListener { view ->
-            val intent = Intent(view.context, ChatActivity::class.java)
-            intent.putExtra("movieId", movie.movieId)
-            intent.putExtra("movieName", movie.name)
-            view.context.startActivity(intent)
-        }
 
     }
 

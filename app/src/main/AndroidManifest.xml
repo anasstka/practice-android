@@ -13,6 +13,9 @@
         android:theme="@style/Theme.CvetkovaPracticeNew"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".presentation.activities.ChatActivity"
+            android:exported="false" />
+        <activity
             android:name=".presentation.activities.SplashActivity"
             android:exported="true">
             <intent-filter>
@@ -29,9 +32,7 @@
             android:exported="false" />
         <activity
             android:name=".presentation.activities.MainActivity"
-            android:exported="true">
-
-        </activity>
+            android:exported="true"></activity>
     </application>
 
 </manifest>

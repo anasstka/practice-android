@@ -1,4 +1,4 @@
-package com.example.app_wear.presenattion.activities
+package com.example.app_wear.presentation.activities
 
 import android.content.Intent
 import android.os.AsyncTask
@@ -12,7 +12,7 @@ import com.example.app_wear.network.ApiHandler
 import com.example.app_wear.network.ApiService
 import com.example.app_wear.network.models.LoginBody
 import com.example.app_wear.network.models.LoginResponse
-import com.example.app_wear.presenattion.view.Dialog
+import com.example.app_wear.presentation.view.Dialog
 import kotlinx.android.synthetic.main.activity_sign_in.*
 import retrofit2.Call
 import retrofit2.Callback

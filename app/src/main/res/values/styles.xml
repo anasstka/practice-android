@@ -61,4 +61,14 @@
             bold
         </item>
     </style>
+
+    <style name="TextView12">
+        <item name="android:textSize">
+            12sp
+        </item>
+        <item name="android:textColor">
+            #FFBFAB
+        </item>
+
+    </style>
 </resources>

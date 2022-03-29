@@ -1,0 +1,41 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    android:orientation="vertical"
+    tools:context=".presentation.activities.MainActivity">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="168dp"
+        android:layout_height="104dp"
+        android:layout_gravity="center"
+        android:foreground="@drawable/card_movie_background"
+        android:elevation="24dp"
+        app:cardCornerRadius="16dp">
+
+        <ImageView
+            android:id="@+id/iv_moviePoster"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:src="@drawable/poster" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_play"/>
+
+        <TextView
+            android:id="@+id/tv_movieTitle"
+            style="@style/TextView14"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginBottom="8dp"
+            android:layout_gravity="bottom"
+            android:textColor="#fff" />
+    </androidx.cardview.widget.CardView>
+</LinearLayout>

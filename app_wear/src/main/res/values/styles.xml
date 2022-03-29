@@ -37,6 +37,18 @@
         </item>
     </style>
 
+    <style name="TextView14">
+        <item name="android:textSize">
+            14sp
+        </item>
+        <item name="android:textColor">
+            @color/primary
+        </item>
+        <item name="android:textStyle">
+            bold
+        </item>
+    </style>
+
     <style name="TextView12">
         <item name="android:textSize">
             12sp
@@ -47,6 +59,5 @@
         <item name="android:textColor">
             #FFFFFF
         </item>
-
     </style>
 </resources>
