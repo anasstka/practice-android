@@ -14,7 +14,7 @@ data class MessageResponse(
     @SerializedName("lastName")
     var lastName: String,
     @SerializedName("avatar")
-    var avatar: String,
+    var userAvatar: String,
     @SerializedName("text")
     var text: String,
 )

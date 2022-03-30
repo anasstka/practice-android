@@ -28,6 +28,14 @@ interface ApiService {
         chatId: Int
     ): Call<List<MessageResponse>>
 
+    @POST("/chats/{chatId}/messages")
+    fun sendMessage(
+        @Path("chatId")
+        chatId: Int,
+        @Body
+        messageBody: MessageBody
+    ): Call<MessageResponse>
+
     @GET("/user/avatar")
     fun changeUserAvatar(
         @Query("file")

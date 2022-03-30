@@ -1,6 +1,5 @@
 package com.example.cvetkovapracticenew.presentation.adapters
 
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,69 +9,82 @@ import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.example.cvetkovapracticenew.R
 import com.example.cvetkovapracticenew.network.models.MessageResponse
-import com.example.cvetkovapracticenew.network.models.MoviesResponse
-import com.example.cvetkovapracticenew.presentation.activities.ChatActivity
 
-class ChatAdapter(val messages: MessageResponse) :
-    RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
 
-    class MovieViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+class ChatAdapter(val messages: List<MessageResponse>) :
+    RecyclerView.Adapter<ChatAdapter.ChatViewHolder>() {
+
+    class ChatViewHolder(view: View) : RecyclerView.ViewHolder(view) { //SentMessageHolder
         var tvTextMessage: TextView
         var tvTextInfoAboutMessage: TextView
         var ivAvatar: ImageView
 
         init {
-            tvMovieTitle = view.findViewById(R.id.iv)
-            ivMoviePoster = view.findViewById(R.id.iv_moviePoster)
+            tvTextMessage = view.findViewById(R.id.tv_textMessage)
+            tvTextInfoAboutMessage = view.findViewById(R.id.tv_textInfoAboutMessage)
+            ivAvatar = view.findViewById(R.id.iv_avatar)
+        }
+
+        fun bindView(message: MessageResponse) {
+            tvTextMessage.text = message.text
+            tvTextInfoAboutMessage.text = "${message.firstName} ${message.lastName} • ${message.creationDateTime}"
+            ivAvatar.load("http://cinema.areas.su/up/images/" + message.userAvatar)
         }
     }
 
-    //
-//    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
-//        val itemView: View = LayoutInflater
-//            .from(parent.context)
-//            .inflate(
-//                R.layout.movie_item,
-//                parent,
-//                false
-//            )
-//        return MovieViewHolder(itemView)
-//    }
-//
-//    override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
-//        val movie = movies[position]
-//
-//        holder.tvMovieTitle.text = movie.name
-//        holder.ivMoviePoster.load("http://cinema.areas.su/up/images/" + movie.posterUrl)
-//
-//        holder.itemView.setOnClickListener { view ->
-//            val intent = Intent(view.context, ChatActivity::class.java)
-//            intent.putExtra("movieId", movie.movieId)
-//            intent.putExtra("movieName", movie.name)
-//            view.context.startActivity(intent)
-//        }
-//
-//    }
-//
-//    override fun getItemCount(): Int {
-//        return movies.size
-//    }
+    private val VIEW_TYPE_MESSAGE_ME = 1 // мы
+    private val VIEW_TYPE_MESSAGE_OTHER = 2 // другой пользователь
+
+    override fun getItemViewType(position: Int): Int {
+        val message = messages[position]
+
+        return if (message.firstName == "")
+            VIEW_TYPE_MESSAGE_ME
+        else
+            VIEW_TYPE_MESSAGE_OTHER
+    }
+
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): MovieAdapter.MovieViewHolder {
-        val itemView: View = LayoutInflater
-            .from(parent.context)
-            .inflate(
-                R.layout.movie_item,
-                parent,
-                false
-            )
-        return MovieViewHolder(itemView)
+    ): ChatViewHolder {
+        val itemView: View = when (viewType) {
+            VIEW_TYPE_MESSAGE_ME -> {
+                LayoutInflater
+                    .from(parent.context)
+                    .inflate(
+                        R.layout.item_message_me,
+                        parent,
+                        false
+                    )
+            }
+            VIEW_TYPE_MESSAGE_OTHER -> {
+                LayoutInflater
+                    .from(parent.context)
+                    .inflate(
+                        R.layout.item_message_other,
+                        parent,
+                        false
+                    )
+            }
+            else -> {
+                LayoutInflater
+                    .from(parent.context)
+                    .inflate(
+                        R.layout.item_message_other,
+                        parent,
+                        false
+                    )
+            }
+        }
+
+        return ChatViewHolder(itemView)
     }
 
-    override fun onBindViewHolder(holder: MovieAdapter.MovieViewHolder, position: Int) {
-        TODO("Not yet implemented")
+    override fun onBindViewHolder(holder: ChatViewHolder, position: Int) {
+        val message = messages[position]
+
+        holder.bindView(message)
     }
 
     override fun getItemCount(): Int {

@@ -97,7 +97,7 @@ class ProfileFragment : Fragment(), View.OnClickListener {
         when (requestCode) {
             GALLERY_REQUEST -> if (resultCode == RESULT_OK) {
                 val selectedImage: Uri? = data?.data
-                ivAvatar.setImageURI(selectedImage   )
+                ivAvatar.setImageURI(selectedImage)
             }
         }
     }

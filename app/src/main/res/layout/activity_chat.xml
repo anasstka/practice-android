@@ -36,15 +36,15 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_movies"
+        android:id="@+id/rv_chat"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
         android:layout_marginHorizontal="@dimen/dimen_16"
+        android:layout_weight="1"
         android:divider="@android:color/transparent"
         android:dividerHeight="40dp"
         android:orientation="vertical"
-        tools:listitem="@layout/message_item_for_user"/>
+        tools:listitem="@layout/item_message_other" />
 
     <LinearLayout
         android:layout_width="match_parent"

@@ -29,7 +29,7 @@ class MovieAdapter(val movies: List<MoviesResponse>) :
         val itemView: View = LayoutInflater
             .from(parent.context)
             .inflate(
-                R.layout.movie_item,
+                R.layout.item_movie,
                 parent,
                 false
             )
