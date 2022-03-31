@@ -1,5 +1,6 @@
 package com.example.cvetkovapracticenew.presentation.adapters
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,10 +9,11 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.example.cvetkovapracticenew.R
+import com.example.cvetkovapracticenew.data.userToken
 import com.example.cvetkovapracticenew.network.models.MessageResponse
 
 
-class ChatAdapter(val messages: List<MessageResponse>) :
+class ChatAdapter(val messages: List<MessageResponse>, val userName: String) :
     RecyclerView.Adapter<ChatAdapter.ChatViewHolder>() {
 
     class ChatViewHolder(view: View) : RecyclerView.ViewHolder(view) { //SentMessageHolder
@@ -27,7 +29,8 @@ class ChatAdapter(val messages: List<MessageResponse>) :
 
         fun bindView(message: MessageResponse) {
             tvTextMessage.text = message.text
-            tvTextInfoAboutMessage.text = "${message.firstName} ${message.lastName} • ${message.creationDateTime}"
+            tvTextInfoAboutMessage.text =
+                "${message.firstName} ${message.lastName} • ${message.creationDateTime}"
             ivAvatar.load("http://cinema.areas.su/up/images/" + message.userAvatar)
         }
     }
@@ -38,7 +41,9 @@ class ChatAdapter(val messages: List<MessageResponse>) :
     override fun getItemViewType(position: Int): Int {
         val message = messages[position]
 
-        return if (message.firstName == "")
+        Log.i("!!!", "${message.firstName} ${message.lastName} --- $userName")
+
+        return if ("${message.firstName} ${message.lastName}" == userName)
             VIEW_TYPE_MESSAGE_ME
         else
             VIEW_TYPE_MESSAGE_OTHER

@@ -1,5 +1,6 @@
 package com.example.cvetkovapracticenew.presentation.activities
 
+import android.os.AsyncTask
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
@@ -9,15 +10,24 @@ import androidx.navigation.ui.NavigationUI.setupWithNavController
 import com.example.cvetkovapracticenew.R
 import com.example.cvetkovapracticenew.data.SharedPrefs
 import com.example.cvetkovapracticenew.data.userToken
+import com.example.cvetkovapracticenew.network.ApiHandler
+import com.example.cvetkovapracticenew.network.ApiService
+import com.example.cvetkovapracticenew.network.models.UserResponse
 import com.example.cvetkovapracticenew.presentation.fragments.CollectionsFragment
 import com.example.cvetkovapracticenew.presentation.fragments.MainFragment
 import com.example.cvetkovapracticenew.presentation.fragments.ProfileFragment
 import com.example.cvetkovapracticenew.presentation.fragments.SelectionsFragment
+import com.example.cvetkovapracticenew.presentation.view.Dialog
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_main.*
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelectedListener {
+
+    var service: ApiService = ApiHandler.instance.service
 
     val mainFragment = MainFragment()
     val collectionsFragment = CollectionsFragment()
@@ -31,8 +41,36 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
         val sharedPrefs = SharedPrefs(applicationContext)
         userToken = sharedPrefs.token
 
+        getUser()
+
         bottom_navigation.setOnNavigationItemSelectedListener(this)
         bottom_navigation.selectedItemId = R.id.main_page
+    }
+
+    private fun getUser() {
+        AsyncTask.execute {
+            service.getUser().enqueue(object : Callback<List<UserResponse>> {
+                override fun onResponse(
+                    call: Call<List<UserResponse>>,
+                    response: Response<List<UserResponse>>
+                ) {
+                    if (response.isSuccessful) {
+                        val users = response.body()
+                        if (users != null) {
+                            val user = users[0]
+                            val sharedPrefs = SharedPrefs(applicationContext)
+                            sharedPrefs.userName = "${user.firstName} ${user.lastName}"
+                        }
+                    } else {
+                        Dialog(this@MainActivity, "Проблемы при загрузке данных")
+                    }
+                }
+
+                override fun onFailure(call: Call<List<UserResponse>>, t: Throwable) {
+                    Dialog(this@MainActivity, "Проблемы при загрузке данных")
+                }
+            })
+        }
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {

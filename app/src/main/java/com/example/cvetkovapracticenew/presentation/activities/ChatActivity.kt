@@ -35,8 +35,6 @@ class ChatActivity : AppCompatActivity(), View.OnClickListener {
     lateinit var movieId: String
     lateinit var movieName: String
 
-    var messages: List<MessageResponse>? = emptyList()
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chat)
@@ -44,7 +42,7 @@ class ChatActivity : AppCompatActivity(), View.OnClickListener {
         val sharedPrefs = SharedPrefs(applicationContext)
         userToken = sharedPrefs.token
 
-        movieId = intent.getStringExtra("movieId") ?: ""
+        movieId = "4" //intent.getStringExtra("movieId") ?: ""
         movieName = intent.getStringExtra("movieName") ?: ""
 
         tv_movieName.text = movieName
@@ -79,9 +77,11 @@ class ChatActivity : AppCompatActivity(), View.OnClickListener {
                         response: Response<List<MessageResponse>>
                     ) {
                         if (response.isSuccessful) {
-                            messages = response.body()
+                            val sharedPrefs = SharedPrefs(applicationContext)
+
+                            val messages = response.body()
                             if (messages != null)
-                                rv_chat.adapter = ChatAdapter(messages!!)
+                                rv_chat.adapter = ChatAdapter(messages, sharedPrefs.userName ?: "")
                         } else {
                             Dialog(applicationContext, "Ошибка сервера")
                         }
@@ -110,10 +110,8 @@ class ChatActivity : AppCompatActivity(), View.OnClickListener {
                         if (response.isSuccessful) {
                             val message = response.body()
                             if (message != null) {
-                                messages = messages?.plus(message)
-                                rv_chat.adapter?.notifyDataSetChanged()
+                                getUserChat()
                             }
-//                                rv_chat.adapter = ChatAdapter(messages)
                         } else {
                             Dialog(applicationContext, "Ошибка сервера")
                         }

@@ -1,18 +1,21 @@
 package com.example.cvetkovapracticenew.presentation.activities
 
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.AsyncTask
 import android.os.Bundle
 import android.util.Patterns
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import coil.load
 import com.example.cvetkovapracticenew.R
 import com.example.cvetkovapracticenew.data.SharedPrefs
 import com.example.cvetkovapracticenew.network.ApiHandler
 import com.example.cvetkovapracticenew.network.ApiService
 import com.example.cvetkovapracticenew.network.models.LoginBody
 import com.example.cvetkovapracticenew.network.models.LoginResponse
+import com.example.cvetkovapracticenew.network.models.UserResponse
 import com.example.cvetkovapracticenew.presentation.view.Dialog
 import kotlinx.android.synthetic.main.activity_sign_in.*
 import retrofit2.Call
@@ -22,10 +25,13 @@ import retrofit2.Response
 class SignInActivity : AppCompatActivity(), View.OnClickListener {
 
     var service: ApiService = ApiHandler.instance.service
+    lateinit var sharedPrefs: SharedPrefs
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign_in)
+
+        sharedPrefs = SharedPrefs(applicationContext)
 
         btn_signIn.setOnClickListener(this)
         btn_openSignUp.setOnClickListener(this)
@@ -54,7 +60,6 @@ class SignInActivity : AppCompatActivity(), View.OnClickListener {
                     response: Response<LoginResponse>
                 ) {
                     if (response.isSuccessful) {
-                        val sharedPrefs = SharedPrefs(applicationContext)
                         sharedPrefs.token = response.body()?.token ?: -1
 
                         val intent = Intent(applicationContext, MainActivity::class.java)
