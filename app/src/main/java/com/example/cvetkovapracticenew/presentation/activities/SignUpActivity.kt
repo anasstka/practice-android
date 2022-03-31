@@ -12,7 +12,6 @@ import com.example.cvetkovapracticenew.network.ApiHandler
 import com.example.cvetkovapracticenew.network.ApiService
 import com.example.cvetkovapracticenew.network.models.RegistrationBody
 import com.example.cvetkovapracticenew.presentation.view.Dialog
-import kotlinx.android.synthetic.main.activity_sign_in.*
 import kotlinx.android.synthetic.main.activity_sign_up.*
 import okhttp3.ResponseBody
 import retrofit2.Call
@@ -94,15 +93,15 @@ class SignUpActivity : AppCompatActivity(), View.OnClickListener {
             Dialog(this@SignUpActivity, "Поле E-mail не может быть пустым")
             return false
         }
-        if (!Patterns.EMAIL_ADDRESS.matcher(et_signInEmail.text.toString()).matches()) {
+        if (!Patterns.EMAIL_ADDRESS.matcher(et_signUpEmail.text.toString()).matches()) {
             Dialog(this@SignUpActivity, "Некорректный E-mail")
             return false
         }
-        if (et_signInPassword.text.toString().isBlank()) {
+        if (et_signUpPassword.text.toString().isBlank()) {
             Dialog(this@SignUpActivity, "Поле Пароль не может быть пустым")
             return false
         }
-        if (et_signInPassword.text.toString() != et_signInRepeatPassword.text.toString()) {
+        if (et_signUpPassword.text.toString() != et_signInRepeatPassword.text.toString()) {
             Dialog(this@SignUpActivity, "Пароли не совпадают")
             return false
         }

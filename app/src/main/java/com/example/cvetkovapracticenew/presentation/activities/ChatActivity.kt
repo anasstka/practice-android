@@ -96,7 +96,7 @@ class ChatActivity : AppCompatActivity(), View.OnClickListener {
 
     private fun sendMessage() {
         if (et_message.text.isBlank()) {
-            Dialog(applicationContext, "Введите сообщение")
+            Dialog(this@ChatActivity, "Введите сообщение")
             return
         }
 
