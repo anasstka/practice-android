@@ -2,6 +2,7 @@ package com.example.cvetkovapracticenew.network.models
 
 import com.google.gson.annotations.SerializedName
 
+// класс для получения ответа get запроса сообщений
 data class MessageResponse(
     @SerializedName("chatId")
     var chatId: String,

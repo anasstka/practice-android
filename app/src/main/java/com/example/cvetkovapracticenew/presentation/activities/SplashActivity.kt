@@ -1,13 +1,15 @@
 package com.example.cvetkovapracticenew.presentation.activities
 
+import android.annotation.SuppressLint
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.view.WindowManager
+import androidx.appcompat.app.AppCompatActivity
 import com.example.cvetkovapracticenew.R
 import com.example.cvetkovapracticenew.data.SharedPrefs
 
+@SuppressLint("CustomSplashScreen")
 class SplashActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -18,6 +20,8 @@ class SplashActivity : AppCompatActivity() {
             WindowManager.LayoutParams.FLAG_FULLSCREEN
         )
 
+        // задержка загрузочного экрана 3 сек, а потом в зависимсости имеется ли токен
+        // переход либо на экран авторизации, либо на главный экран
         Handler().postDelayed({
             val sharedPrefs = SharedPrefs(applicationContext)
             val intent =

@@ -1,22 +1,18 @@
 package com.example.cvetkovapracticenew.presentation.activities
 
 import android.content.Intent
-import android.content.SharedPreferences
 import android.os.AsyncTask
 import android.os.Bundle
 import android.util.Patterns
 import android.view.View
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import coil.load
 import com.example.cvetkovapracticenew.R
 import com.example.cvetkovapracticenew.data.SharedPrefs
 import com.example.cvetkovapracticenew.network.ApiHandler
 import com.example.cvetkovapracticenew.network.ApiService
 import com.example.cvetkovapracticenew.network.models.LoginBody
 import com.example.cvetkovapracticenew.network.models.LoginResponse
-import com.example.cvetkovapracticenew.network.models.UserResponse
-import com.example.cvetkovapracticenew.presentation.view.Dialog
+import com.example.cvetkovapracticenew.presentation.view.dialog
 import kotlinx.android.synthetic.main.activity_sign_in.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -24,6 +20,7 @@ import retrofit2.Response
 
 class SignInActivity : AppCompatActivity(), View.OnClickListener {
 
+    // сервис для отправки запросов
     var service: ApiService = ApiHandler.instance.service
     lateinit var sharedPrefs: SharedPrefs
 
@@ -37,6 +34,7 @@ class SignInActivity : AppCompatActivity(), View.OnClickListener {
         btn_openSignUp.setOnClickListener(this)
     }
 
+    // обработчик кликов по кнопкам
     override fun onClick(view: View) {
         when (view.id) {
             R.id.btn_signIn -> {
@@ -49,6 +47,7 @@ class SignInActivity : AppCompatActivity(), View.OnClickListener {
         }
     }
 
+    // метод для асинхронной отправки запроса для авторизации
     private fun doSignIn() {
         if (!isValidField())
             return
@@ -59,6 +58,8 @@ class SignInActivity : AppCompatActivity(), View.OnClickListener {
                     call: Call<LoginResponse>,
                     response: Response<LoginResponse>
                 ) {
+                    // при успешном выполнении запроса токен пользователя сохраняется
+                    // в память устройства и происходит переход на главный экран
                     if (response.isSuccessful) {
                         sharedPrefs.token = response.body()?.token ?: -1
 
@@ -67,18 +68,18 @@ class SignInActivity : AppCompatActivity(), View.OnClickListener {
                         finish()
 
                     } else {
-                        Dialog(this@SignInActivity, "Проблемы при авторизации")
+                        dialog(this@SignInActivity, "Проблемы при авторизации")
                     }
                 }
 
                 override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
-                    Dialog(this@SignInActivity, "Проблемы при авторизации")
+                    dialog(this@SignInActivity, "Проблемы при авторизации")
                 }
             })
         }
     }
 
-
+    // метод получения тела для запроса на авторизацию
     private fun getLoginData(): LoginBody {
         return LoginBody(
             email = et_signInEmail.text.toString(),
@@ -86,17 +87,19 @@ class SignInActivity : AppCompatActivity(), View.OnClickListener {
         )
     }
 
+    // метод для проверки корректности данных в полях ввода
     private fun isValidField(): Boolean {
         if (et_signInEmail.text.toString().isBlank()) {
-            Dialog(this@SignInActivity, "Поле E-mail не может быть пустым")
+            dialog(this@SignInActivity, "Поле E-mail не может быть пустым")
             return false
         }
+        // проверка, что email имеет корректную структуру
         if (!Patterns.EMAIL_ADDRESS.matcher(et_signInEmail.text.toString()).matches()) {
-            Dialog(this@SignInActivity, "Некорректный E-mail")
+            dialog(this@SignInActivity, "Некорректный E-mail")
             return false
         }
         if (et_signInPassword.text.toString().isBlank()) {
-            Dialog(this@SignInActivity, "Поле Пароль не может быть пустым")
+            dialog(this@SignInActivity, "Поле Пароль не может быть пустым")
             return false
         }
         return true

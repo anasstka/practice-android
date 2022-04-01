@@ -1,13 +1,11 @@
 package com.example.cvetkovapracticenew.presentation.view
 
 import android.app.AlertDialog
-import android.app.Dialog
 import android.content.Context
 import android.content.DialogInterface
-import android.os.Bundle
-import androidx.fragment.app.DialogFragment
 
-fun Dialog(
+// функция для создания диалоговых окон с ошибками
+fun dialog(
     context: Context,
     message: String
 ) {
@@ -15,7 +13,6 @@ fun Dialog(
 
     with(builder)
     {
-//        setTitle("Ошибка")
         setMessage(message)
         setPositiveButton("OK", positiveButtonClick)
         show()

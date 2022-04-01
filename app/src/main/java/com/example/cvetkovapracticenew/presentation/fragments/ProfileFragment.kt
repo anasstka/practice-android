@@ -6,13 +6,11 @@ import android.graphics.Bitmap
 import android.net.Uri
 import android.os.AsyncTask
 import android.os.Bundle
-import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import coil.load
 import com.example.cvetkovapracticenew.R
@@ -21,7 +19,7 @@ import com.example.cvetkovapracticenew.network.ApiHandler
 import com.example.cvetkovapracticenew.network.ApiService
 import com.example.cvetkovapracticenew.network.models.UserResponse
 import com.example.cvetkovapracticenew.presentation.activities.SignInActivity
-import com.example.cvetkovapracticenew.presentation.view.Dialog
+import com.example.cvetkovapracticenew.presentation.view.dialog
 import kotlinx.android.synthetic.main.fragment_profile.view.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -153,12 +151,12 @@ class ProfileFragment : Fragment(), View.OnClickListener {
                             ivAvatar.load("http://cinema.areas.su/up/images/" + user.avatar)
                         }
                     } else {
-                        Dialog(requireActivity(), "Проблемы при загрузке данных")
+                        dialog(requireActivity(), "Проблемы при загрузке данных")
                     }
                 }
 
                 override fun onFailure(call: Call<List<UserResponse>>, t: Throwable) {
-                    Dialog(requireActivity(), "Проблемы при загрузке данных")
+                    dialog(requireActivity(), "Проблемы при загрузке данных")
                 }
             })
         }

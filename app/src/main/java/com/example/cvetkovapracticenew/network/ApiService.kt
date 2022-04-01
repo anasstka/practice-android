@@ -5,14 +5,21 @@ import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.http.*
 
+// интерфейс для отправки запросов к api через retrofit
 interface ApiService {
 
+    // отправка post запроса для регистрации
     @POST("/auth/register")
-    fun register(@Body registrationBody: RegistrationBody): Call<ResponseBody>
+    fun register(
+        // тело запроса
+        @Body
+        registrationBody: RegistrationBody
+    ): Call<ResponseBody> // ответ запроса
 
     @POST("/auth/login")
     fun login(@Body loginBody: LoginBody): Call<LoginResponse>
 
+    // отправка get запроса для получения списка фильмов
     @GET("/movies")
     fun getMovies(
         @Query("filter")

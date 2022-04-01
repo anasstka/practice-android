@@ -2,6 +2,7 @@ package com.example.cvetkovapracticenew.network.models
 
 import com.google.gson.annotations.SerializedName
 
+// класс для получения ответа get запроса получения пользователя
 data class UserResponse(
     @SerializedName("userId")
     val userId: String,

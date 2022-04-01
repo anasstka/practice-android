@@ -2,6 +2,7 @@ package com.example.cvetkovapracticenew.network.models
 
 import com.google.gson.annotations.SerializedName
 
+// класс для отправки тела post запроса при регшистрации
 data class RegistrationBody(
     @SerializedName("email")
     var email: String,

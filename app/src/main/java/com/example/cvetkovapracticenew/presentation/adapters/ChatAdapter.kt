@@ -1,6 +1,5 @@
 package com.example.cvetkovapracticenew.presentation.adapters
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,14 +8,16 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.example.cvetkovapracticenew.R
-import com.example.cvetkovapracticenew.data.userToken
 import com.example.cvetkovapracticenew.network.models.MessageResponse
 
+// адаптер для заполнение списка сообщениями
+class ChatAdapter(
+    private val messages: List<MessageResponse>,
+    private val userName: String
+) : RecyclerView.Adapter<ChatAdapter.ChatViewHolder>() {
 
-class ChatAdapter(val messages: List<MessageResponse>, val userName: String) :
-    RecyclerView.Adapter<ChatAdapter.ChatViewHolder>() {
-
-    class ChatViewHolder(view: View) : RecyclerView.ViewHolder(view) { //SentMessageHolder
+    // viewholder для инициализации полей элемента списка и заполнение их данными
+    class ChatViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         var tvTextMessage: TextView
         var tvTextInfoAboutMessage: TextView
         var ivAvatar: ImageView
@@ -31,18 +32,21 @@ class ChatAdapter(val messages: List<MessageResponse>, val userName: String) :
             tvTextMessage.text = message.text
             tvTextInfoAboutMessage.text =
                 "${message.firstName} ${message.lastName} • ${message.creationDateTime}"
+            // загрузка аватарки пользователя
             ivAvatar.load("http://cinema.areas.su/up/images/" + message.userAvatar)
         }
     }
 
+    // переменные, определяющие чье сообщение выводится - текущего пользователя
+    // или другого
     private val VIEW_TYPE_MESSAGE_ME = 1 // мы
     private val VIEW_TYPE_MESSAGE_OTHER = 2 // другой пользователь
 
+    // получение типа пользователя
     override fun getItemViewType(position: Int): Int {
         val message = messages[position]
 
-        Log.i("!!!", "${message.firstName} ${message.lastName} --- $userName")
-
+        // сравнение сообщения с текущим пользователем
         return if ("${message.firstName} ${message.lastName}" == userName)
             VIEW_TYPE_MESSAGE_ME
         else
@@ -53,6 +57,7 @@ class ChatAdapter(val messages: List<MessageResponse>, val userName: String) :
         parent: ViewGroup,
         viewType: Int
     ): ChatViewHolder {
+        // выбор layout ресурса в зависимости от типа сообщения
         val itemView: View = when (viewType) {
             VIEW_TYPE_MESSAGE_ME -> {
                 LayoutInflater
@@ -86,6 +91,7 @@ class ChatAdapter(val messages: List<MessageResponse>, val userName: String) :
         return ChatViewHolder(itemView)
     }
 
+    // заполнение viewholder данными
     override fun onBindViewHolder(holder: ChatViewHolder, position: Int) {
         val message = messages[position]
 
